@@ -1,0 +1,36 @@
+# The MIT License (MIT)
+#
+# Copyright (c) 2018 Bartosz Zaczynski
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+
+# Usage:
+# $ docker build -t brainf:linux -f Dockerfile.linux .
+# $ docker run --rm brainf:linux cat /root/brainf-1.0.0-linux.pex > brainf-linux.pex
+
+FROM python:3.6.5-alpine3.7
+
+WORKDIR /root
+COPY . /root
+
+RUN apk add --update --no-cache build-base python3-dev py-pip \
+ && pip3 install . pex==1.4.5 "setuptools<34.0,>=20.3" \
+ && python3 setup.py bdist_wheel install \
+ && export VERSION=`python3 -c "import brainf; print(brainf.__version__)"` \
+ && pex "brainf==$VERSION" -f dist -r requirements.txt -c brainfuck.py -o "brainf-$VERSION-linux.pex"
