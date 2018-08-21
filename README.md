@@ -58,6 +58,14 @@ $ pip uninstall brainf
 
 ## Building
 
+### Executable
+
+This will create a platform-specific executable file which bundles Python interpreter as well as all the required libraries.
+
+```shell
+$ pyinstaller --onefile --additional-hooks-dir src/brainf bin/brainfuck.py
+```
+
 ### Binary Distribution
 
 To build a binary distribution with [Docker](https://www.docker.com/) and [PEX](https://pypi.org/project/pex/) follow the steps below.
