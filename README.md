@@ -60,10 +60,19 @@ $ pip uninstall brainf
 
 ### Executable
 
-This will create a platform-specific executable file which bundles Python interpreter as well as all the required libraries.
+Using [PyInstaller](https://www.pyinstaller.org/) will create a platform-specific executable file which bundles Python interpreter as well as all the required libraries.
 
 ```shell
+$ mkvirtualenv brainf
+$ pip install . pyinstaller
 $ pyinstaller --onefile --additional-hooks-dir src/brainf bin/brainfuck.py
+```
+
+Usage:
+
+```shell
+$ dist/brainfuck samples/hello.b
+Hello World!
 ```
 
 ### Binary Distribution
