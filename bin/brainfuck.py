@@ -1,4 +1,4 @@
-#!/home/bartek/.virtualenvs/dupa/bin/python3
+#!/usr/bin/env python
 
 # The MIT License (MIT)
 #
