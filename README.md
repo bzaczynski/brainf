@@ -32,6 +32,11 @@ Run as a Python Executable (PEX):
 $ python brainf-linux.pex /path/to/file.b
 ```
 
+Run as a platform-specific native executable:
+```shell
+$ ./brainfuck /path/to/file.b
+```
+
 See technical [documentation](http://brainf.readthedocs.io/en/latest/) for more details.
 
 ## Download
